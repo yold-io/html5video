@@ -17,8 +17,6 @@
         <!--<script src="js/vendor/modernizr-2.6.2.min.js"></script>-->
         <script>
 
-
-
             function accessCamera(){
                 var video = document.getElementById("video");
                 var onFailSoHard = function(e) {
@@ -33,7 +31,6 @@
                     navigator.getUserMedia({audio: true, video: true}, function(stream) {
                         video.src = window.URL.createObjectURL(stream);
                         video.autoplay = true;
-                        video.controls = true;
                         video.width = 400;
                         video.height = 300;
                     }, onFailSoHard);
@@ -49,6 +46,12 @@
                 canvas.height = 300;
                 canvas.drawImage(video,0,0,400,300);
             }
+            function saveImage(){
+                var dataURL = document.getElementById("canvas").getContext("2d");
+                var strDataURI = canvas.toDataURL("image/png;base64");
+                document.write('<img src="'+strDataURI+'"/>');
+                document.write('<h2>Right click on the image and choose Save As</h2>');
+            }
         </script>
     </head>
     <body>
@@ -63,6 +66,7 @@
         <button id="btnStart" onclick="accessCamera()">Start Camera</button>
         <button id="btnStop">Stop</button>
         <button id="btnCapture" onclick="captureVideo()">Capture</button>
+        <button id="btnSave" onclick="saveImage()">Save</button>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
